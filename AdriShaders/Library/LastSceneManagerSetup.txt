@@ -1,1 +1,4 @@
-sceneSetups: []
+sceneSetups:
+- path: Assets/PixelShaderEffect/escenaPixelEffect.unity
+  isLoaded: 1
+  isActive: 1
