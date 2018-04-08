@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/PixelShaderEffect/escenaPixelEffect.unity
+- path: Assets/Vignetting/VignettingScene.unity
   isLoaded: 1
   isActive: 1

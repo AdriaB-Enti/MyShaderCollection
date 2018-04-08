@@ -1,10 +1,10 @@
-﻿Shader "Hidden/PixelEffect"
+﻿Shader "PosPro/VignettingEffect"
 {
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-		_Columns("Columns", Float) = 64
-		_Rows("Rows", Float) = 64
+		_BlackIntensity("Black intensity", Float) = 6.5
+		_CircleRadius("CircleRadius", Float) = 0.4
 
 	}
 	SubShader
@@ -39,23 +39,23 @@
 				o.uv = v.uv;
 				return o;
 			}
-			float _Columns;
-			float _Rows;
+			float _BlackIntensity;
+			float _CircleRadius;
 			sampler2D _MainTex;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float2 uv = i.uv;
-				uv.x *= _Columns;
-				uv.y *= _Rows;
-				
-				uv.x = round(uv.x);
-				uv.y = round(uv.y);
 
-				uv.x /= _Columns;
-				uv.y /= _Rows;
+				float dist = distance(uv,float2(0.5,0.5));
 
-				fixed4 col = tex2D(_MainTex, uv);
+				float valorInterp = 1.0;
+				if (dist > _CircleRadius) {		//Si la distancia és mes gran que el cercle, anem enfosquint
+					valorInterp = pow(1.0 + _CircleRadius - dist, _BlackIntensity);
+				}
+
+				fixed4 col = valorInterp*tex2D(_MainTex, uv);
+				//fixed4 col = fixed4(dist, 0.0, 0.0, 1.0);
 
 				return col;
 			}
