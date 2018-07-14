@@ -295,7 +295,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: bb476ad1128a2ab4db3caa8025068bc6, type: 2}
   - {fileID: 2100000, guid: b2d97ee3d67ba814aa0be92d45472386, type: 2}
   - {fileID: 2100000, guid: 3442d460ef2a216428cfbab692b27a67, type: 2}
-  currentEffect: 0
+  - {fileID: 2100000, guid: 5bb724543ed7d394b96249fd6d589811, type: 2}
+  currentEffect: 2
 --- !u!1 &247595657
 GameObject:
   m_ObjectHideFlags: 0

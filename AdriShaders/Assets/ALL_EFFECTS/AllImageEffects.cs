@@ -9,7 +9,8 @@ public class AllImageEffects : MonoBehaviour {
     {
         Pixelation,
         Vignetting,
-        HeatWaves
+        HeatWaves,
+        Transitions
     }
 
     public Material[] imageEffectMaterials;
@@ -20,6 +21,10 @@ public class AllImageEffects : MonoBehaviour {
 	}
 	
 	void Update () {
+
+
+        //si estem a transitions, passar algun valor?
+
 	}
 
     void OnRenderImage(RenderTexture src, RenderTexture dst)
