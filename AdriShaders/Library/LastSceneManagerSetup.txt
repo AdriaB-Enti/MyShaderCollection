@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ALL_EFFECTS/AllEffectsScene.unity
+- path: Assets/DoubleVision/doubleVision.unity
   isLoaded: 1
   isActive: 1
