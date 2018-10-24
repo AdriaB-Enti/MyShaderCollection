@@ -1,13 +1,17 @@
-﻿Shader "Hidden/DoubleVisionEffect"
+﻿Shader "PostPro/DoubleVisionEffect"
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}
+		_MainTex("Texture", 2D) = "white" {}
+		//ignore last two numbers
+		_Direction("Direction", Vector) = (0.1,0,0,0)
 	}
 	SubShader
 	{
 		// No culling or depth
 		Cull Off ZWrite Off ZTest Always
+		//alpha blending
+		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{
@@ -38,13 +42,16 @@
 			}
 			
 			sampler2D _MainTex;
+			Vector _Direction;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, i.uv);
-				// just invert the colors
-				col = 1 - col;
-				return col;
+
+				//fixed2 newUV = i.uv + _Direction.xy;
+				fixed4 col1 = tex2D(_MainTex, i.uv + _Direction.xy/2);
+				fixed4 col2 = tex2D(_MainTex, i.uv - _Direction.xy/2);
+
+				return (col1/2+col2/2);
 			}
 			ENDCG
 		}
