@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class DoubleVisionEffect : MonoBehaviour {
+public class MultipleVisionEffect : MonoBehaviour {
 
     public Material effectMaterial;
 
