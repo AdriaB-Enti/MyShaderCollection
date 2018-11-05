@@ -4,7 +4,7 @@
 	{
 		_MainTex("Texture", 2D) = "white" {}
 		//ignore last two numbers
-		_Direction("Direction", Vector) = (0.1,0,0,0)
+		_Direction("Direction (x,y) & distance", Vector) = (0.1,0,0,0)
 		_Repetitions("Repetitions", Int) = 2
 	}
 	SubShader
@@ -48,18 +48,15 @@
 
 			fixed4 frag (v2f i) : SV_Target
 			{
+				float2 startPoint = - (_Direction.xy * _Repetitions / 2.0f);	//offset vector where the first 'layer' is drawn
+				fixed4 totalCol = (0);
 
-				for (int r = 0; r < _Repetitions/2; r++) {
-
+				for (int r = 0; r < _Repetitions; r++) {
+					float2 currentPoint = startPoint + float(r)*_Direction.xy;
+					totalCol += tex2D(_MainTex, i.uv + currentPoint) / _Repetitions;
 				}
-				if (_Repetitions % 2 == 0) {
 
-				}
-				//fixed2 newUV = i.uv + _Direction.xy;
-				fixed4 col1 = tex2D(_MainTex, i.uv + _Direction.xy/2);
-				fixed4 col2 = tex2D(_MainTex, i.uv - _Direction.xy/2);
-
-				return (col1/2+col2/2);
+				return totalCol;
 			}
 			ENDCG
 		}
